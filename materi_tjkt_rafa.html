@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATERI TJKT — Rafa Samsa'il Hidayat</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00f5ff;
+    --cyan-dim: #00b8c8;
+    --magenta: #ff006e;
+    --yellow: #ffe600;
+    --bg: #020b14;
+    --bg2: #041220;
+    --bg3: #061a2e;
+    --glass: rgba(0,245,255,0.04);
+    --glass-border: rgba(0,245,255,0.15);
+    --text: #c8e8f0;
+    --text-dim: #5a8a99;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── SCANLINE ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 60px 40px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--glass-border);
+    background: linear-gradient(180deg, rgba(0,245,255,0.05) 0%, transparent 100%);
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--cyan);
+    background: rgba(0,245,255,0.08);
+    border: 1px solid var(--glass-border);
+    padding: 6px 18px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  h1.site-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 60px rgba(0,245,255,0.2);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1.site-title span { color: var(--cyan); }
+
+  .header-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-top: 10px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .student-card {
+    display: inline-flex;
+    gap: 30px;
+    margin-top: 30px;
+    padding: 14px 32px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .student-card span { color: var(--cyan); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 2px;
+    padding: 0 40px;
+    background: rgba(2,11,20,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    overflow-x: auto;
+  }
+
+  nav a {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 16px 20px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  nav a:hover {
+    color: var(--cyan);
+    border-bottom-color: var(--cyan);
+    background: rgba(0,245,255,0.04);
+  }
+
+  /* ── MAIN ── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* ── SECTION ── */
+  section {
+    margin-bottom: 80px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .section-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--magenta);
+    letter-spacing: 2px;
+    border: 1px solid var(--magenta);
+    padding: 4px 10px;
+    opacity: 0.8;
+  }
+
+  h2.section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0,245,255,0.3);
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--glass-border), transparent);
+  }
+
+  /* ── CMD GRID ── */
+  .cmd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .cmd-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .cmd-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .cmd-card:hover {
+    background: rgba(0,245,255,0.07);
+    border-color: var(--cyan-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,245,255,0.1);
+  }
+
+  .cmd-card:hover::before { transform: scaleX(1); }
+
+  .cmd-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    color: var(--cyan);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cmd-name::before {
+    content: 'C:\\>';
+    font-size: 11px;
+    color: var(--magenta);
+    opacity: 0.7;
+  }
+
+  .cmd-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .cmd-flags {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cmd-flag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    background: rgba(0,0,0,0.3);
+    border-left: 2px solid var(--yellow);
+    padding: 5px 10px;
+    line-height: 1.5;
+  }
+
+  .cmd-flag .flag-key { color: var(--yellow); }
+  .cmd-flag .flag-val { color: var(--text-dim); }
+
+  /* ── IP TABLE ── */
+  .ip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .ip-card {
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    background: var(--glass);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .ip-card:hover {
+    border-color: var(--cyan-dim);
+    background: rgba(0,245,255,0.06);
+    box-shadow: 0 0 20px rgba(0,245,255,0.08);
+  }
+
+  .ip-class {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0,245,255,0.5);
+    margin-bottom: 12px;
+  }
+
+  .ip-row {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    margin-bottom: 5px;
+  }
+
+  .ip-label { color: var(--text-dim); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px; }
+  .ip-val { color: var(--text); }
+
+  .ip-card.kelas-a { --accent: #00f5ff; }
+  .ip-card.kelas-b { --accent: #00ff9f; }
+  .ip-card.kelas-c { --accent: #ffe600; }
+  .ip-card.kelas-d { --accent: #ff006e; }
+  .ip-card.kelas-e { --accent: #bf00ff; }
+
+  .ip-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, var(--accent, var(--cyan)), transparent 70%);
+    opacity: 0.15;
+  }
+
+  /* ── VOLT TABLE ── */
+  .volt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .volt-card {
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    padding: 20px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .volt-card:hover {
+    border-color: var(--yellow);
+    background: rgba(255,230,0,0.04);
+  }
+
+  .volt-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .volt-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .volt-spec {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .volt-spec .val { color: var(--yellow); }
+
+  /* ── VIRTUAL APP ── */
+  .virt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .virt-card {
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .virt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,245,255,0.1);
+  }
+
+  .virt-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    letter-spacing: 3px;
+  }
+
+  .virt-card.vbox .virt-logo { color: #2a7fff; text-shadow: 0 0 20px rgba(42,127,255,0.5); }
+  .virt-card.vmware .virt-logo { color: #00b3e6; text-shadow: 0 0 20px rgba(0,179,230,0.5); }
+  .virt-card.proxmox .virt-logo { color: #e57000; text-shadow: 0 0 20px rgba(229,112,0,0.5); }
+
+  .virt-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border: 1px solid;
+    margin-bottom: 14px;
+  }
+
+  .virt-card.vbox .virt-tag { color: #2a7fff; border-color: #2a7fff; background: rgba(42,127,255,0.1); }
+  .virt-card.vmware .virt-tag { color: #00b3e6; border-color: #00b3e6; background: rgba(0,179,230,0.1); }
+  .virt-card.proxmox .virt-tag { color: #e57000; border-color: #e57000; background: rgba(229,112,0,0.1); }
+
+  .virt-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .virt-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .virt-feat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 4px 10px;
+  }
+
+  /* ── PROFESI TABLE ── */
+  .profesi-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+  }
+
+  table.profesi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  table.profesi-table thead tr {
+    background: rgba(0,245,255,0.08);
+    border-bottom: 1px solid var(--cyan);
+  }
+
+  table.profesi-table thead th {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    padding: 14px 16px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  table.profesi-table tbody tr {
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+    transition: background 0.2s;
+  }
+
+  table.profesi-table tbody tr:hover {
+    background: rgba(0,245,255,0.05);
+  }
+
+  table.profesi-table tbody td {
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    vertical-align: top;
+  }
+
+  table.profesi-table tbody td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  table.profesi-table tbody td:nth-child(2) {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .profesi-badge {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border: 1px solid rgba(0,245,255,0.3);
+    color: var(--cyan);
+    background: rgba(0,245,255,0.07);
+    margin: 2px;
+    white-space: nowrap;
+  }
+
+  .usaha-badge {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border: 1px solid rgba(255,230,0,0.3);
+    color: var(--yellow);
+    background: rgba(255,230,0,0.07);
+    margin: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(0,245,255,0.2); }
+    50% { box-shadow: 0 0 25px rgba(0,245,255,0.5); }
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 8px; height: 1em;
+    background: var(--cyan);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--glass-border);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--cyan); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0;
+    opacity: 0.3;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cyan);
+  }
+  .divider-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--cyan);
+  }
+
+  /* info box */
+  .info-box {
+    background: rgba(0,245,255,0.04);
+    border: 1px solid rgba(0,245,255,0.12);
+    border-left: 3px solid var(--cyan);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  .info-box .highlight { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">TEKNIK JARINGAN KOMPUTER DAN TELEKOMUNIKASI</div>
+  <h1 class="site-title">MATERI <span>TJKT</span><span class="cursor-blink"></span></h1>
+  <p class="header-sub">// KUMPULAN MATERI PEMBELAJARAN //</p>
+  <div class="student-card">
+    <div>NAMA: <span>RAFA SAMSA'IL HIDAYAT</span></div>
+    <div>KELAS: <span>10 TJKT</span></div>
+  </div>
+</header>
+
+<nav>
+  <a href="#cmd">CMD</a>
+  <a href="#ip">IP Address</a>
+  <a href="#volt">Voltase & Watt</a>
+  <a href="#virtual">Aplikasi Virtual</a>
+  <a href="#profesi">Profesi IT</a>
+</nav>
+
+<main>
+
+  <!-- ══ CMD ══ -->
+  <section id="cmd">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">Intrusi Command Prompt</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="info-box"><span class="highlight">></span> Command Prompt (CMD) adalah antarmuka baris perintah di Windows untuk menjalankan perintah jaringan dan sistem secara langsung.</div>
+    <div class="cmd-grid">
+
+      <div class="cmd-card">
+        <div class="cmd-name">ipconfig</div>
+        <div class="cmd-desc">Lihat konfigurasi IP & refresh DHCP</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">/all</span> <span class="flag-val">— Tampilkan detail lengkap</span></div>
+          <div class="cmd-flag"><span class="flag-key">/release</span> <span class="flag-val">— Lepas alamat IP</span></div>
+          <div class="cmd-flag"><span class="flag-key">/renew</span> <span class="flag-val">— Dapatkan IP baru</span></div>
+          <div class="cmd-flag"><span class="flag-key">/flushdns</span> <span class="flag-val">— Bersihkan cache DNS</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">ping</div>
+        <div class="cmd-desc">Mengecek koneksi ke alamat IP atau domain</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">-t [alamat]</span> <span class="flag-val">— Ping terus menerus (CTRL+C stop)</span></div>
+          <div class="cmd-flag"><span class="flag-key">-n [jml] [alamat]</span> <span class="flag-val">— Jumlah ping. Contoh: -n 10</span></div>
+          <div class="cmd-flag"><span class="flag-key">-l [ukuran]</span> <span class="flag-val">— Ukuran paket (byte). Contoh: -l 1000</span></div>
+          <div class="cmd-flag"><span class="flag-key">-4 / -6</span> <span class="flag-val">— Paksa IPv4 / IPv6</span></div>
+          <div class="cmd-flag"><span class="flag-key">-a [IP]</span> <span class="flag-val">— Cari hostname dari IP</span></div>
+          <div class="cmd-flag"><span class="flag-key">Gabungan:</span> <span class="flag-val">ping -n 5 -l 1000 google.com</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">tracert</div>
+        <div class="cmd-desc">Melacak rute paket data menuju tujuan</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">tracert google.com</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">netstat</div>
+        <div class="cmd-desc">Menampilkan koneksi jaringan aktif & port</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">-an</span> <span class="flag-val">— Tampilkan semua koneksi & port</span></div>
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">netstat -an</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">nslookup</div>
+        <div class="cmd-desc">Mengecek informasi DNS dari sebuah domain</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">nslookup google.com</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">arp</div>
+        <div class="cmd-desc">Menampilkan & memodifikasi tabel ARP</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">-a</span> <span class="flag-val">— Tampilkan semua entri ARP</span></div>
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">arp -a</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">hostname</div>
+        <div class="cmd-desc">Menampilkan nama komputer saat ini</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">hostname</span></div>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-name">netsh</div>
+        <div class="cmd-desc">Konfigurasi jaringan tingkat lanjut</div>
+        <div class="cmd-flags">
+          <div class="cmd-flag"><span class="flag-key">Contoh:</span> <span class="flag-val">netsh wlan show profiles</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ IP ADDRESS ══ -->
+  <section id="ip">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2 class="section-title">IP Address</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="info-box"><span class="highlight">></span> IP address adalah sebuah alamat yang dimiliki setiap perangkat secara global. Terbagi menjadi 5 kelas utama.</div>
+    <div class="ip-grid">
+
+      <div class="ip-card kelas-a">
+        <div class="ip-class">A</div>
+        <div class="ip-label">IP Address</div>
+        <div class="ip-row ip-val">10.10.0.2</div>
+        <div class="ip-label">Gateway</div>
+        <div class="ip-row ip-val">10.10.0.1</div>
+        <div class="ip-label">Subnetmask</div>
+        <div class="ip-row ip-val">255.0.0.0</div>
+      </div>
+
+      <div class="ip-card kelas-b">
+        <div class="ip-class" style="color:#00ff9f;text-shadow:0 0 20px rgba(0,255,159,0.5)">B</div>
+        <div class="ip-label">IP Address</div>
+        <div class="ip-row ip-val">176.10.0.2</div>
+        <div class="ip-label">Gateway</div>
+        <div class="ip-row ip-val">176.10.0.1</div>
+        <div class="ip-label">Subnetmask</div>
+        <div class="ip-row ip-val">255.255.0.0</div>
+      </div>
+
+      <div class="ip-card kelas-c">
+        <div class="ip-class" style="color:#ffe600;text-shadow:0 0 20px rgba(255,230,0,0.5)">C</div>
+        <div class="ip-label">IP Address</div>
+        <div class="ip-row ip-val">192.168.0.2</div>
+        <div class="ip-label">Gateway</div>
+        <div class="ip-row ip-val">192.168.0.1</div>
+        <div class="ip-label">Subnetmask</div>
+        <div class="ip-row ip-val">255.255.255.0</div>
+      </div>
+
+      <div class="ip-card kelas-d">
+        <div class="ip-class" style="color:#ff006e;text-shadow:0 0 20px rgba(255,0,110,0.5)">D</div>
+        <div class="ip-label">IP Address</div>
+        <div class="ip-row ip-val">224.0.0.2</div>
+        <div class="ip-label">Gateway</div>
+        <div class="ip-row ip-val">224.0.0.1</div>
+        <div class="ip-label">Subnetmask</div>
+        <div class="ip-row" style="color:var(--text-dim);font-style:italic">Multicast (tidak ada)</div>
+      </div>
+
+      <div class="ip-card kelas-e">
+        <div class="ip-class" style="color:#bf00ff;text-shadow:0 0 20px rgba(191,0,255,0.5)">E</div>
+        <div class="ip-label">IP Address</div>
+        <div class="ip-row ip-val">240.0.0.2</div>
+        <div class="ip-label">Gateway</div>
+        <div class="ip-row ip-val">240.0.0.1</div>
+        <div class="ip-label">Subnetmask</div>
+        <div class="ip-row" style="color:var(--text-dim);font-style:italic">Eksperimental</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ VOLTASE ══ -->
+  <section id="volt">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Voltase &amp; Watt Peralatan Elektronik</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="volt-grid">
+
+      <div class="volt-card">
+        <div class="volt-icon">🍚</div>
+        <div class="volt-name">Mejikom</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Memasak: <span class="val">300–800W</span></div>
+        <div class="volt-spec">Menghangatkan: <span class="val">50–100W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">📺</div>
+        <div class="volt-name">TV</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Daya: <span class="val">30–50W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">💧</div>
+        <div class="volt-name">Dispenser</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Pemanas: <span class="val">300–500W</span></div>
+        <div class="volt-spec">Pendingin: <span class="val">80–120W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">🔥</div>
+        <div class="volt-name">Setrika</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Daya: <span class="val">300–600W</span></div>
+        <div class="volt-spec">Setrika uap: <span class="val">s/d 1000W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">❄️</div>
+        <div class="volt-name">Kulkas</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Daya: <span class="val">70–200W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">💻</div>
+        <div class="volt-name">Laptop</div>
+        <div class="volt-spec">Adaptor: <span class="val">100–240V</span></div>
+        <div class="volt-spec">Daya: <span class="val">45–90W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">🖥️</div>
+        <div class="volt-name">PC</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">PC Biasa: <span class="val">200–400W</span></div>
+        <div class="volt-spec">PC Gaming: <span class="val">500–800W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">📱</div>
+        <div class="volt-name">HP</div>
+        <div class="volt-spec">Voltase pengisian: <span class="val">5V</span></div>
+        <div class="volt-spec">Daya: <span class="val">5–25W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">🫧</div>
+        <div class="volt-name">Mesin Cuci</div>
+        <div class="volt-spec">Voltase: <span class="val">220V</span></div>
+        <div class="volt-spec">Daya: <span class="val">300–500W</span></div>
+      </div>
+
+      <div class="volt-card">
+        <div class="volt-icon">🔌</div>
+        <div class="volt-name">Charger</div>
+        <div class="volt-spec">Input: <span class="val">220V</span></div>
+        <div class="volt-spec">Normal: <span class="val">5V–2A (10W)</span></div>
+        <div class="volt-spec">Fast Charging: <span class="val">15–33W</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ APLIKASI VIRTUAL ══ -->
+  <section id="virtual">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">Aplikasi Virtual</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="virt-grid">
+
+      <div class="virt-card vbox">
+        <div class="virt-logo">VirtualBox</div>
+        <div class="virt-tag">OPEN SOURCE · ORACLE</div>
+        <div class="virt-desc">Software virtual gratis buatan Oracle untuk menjalankan sistem operasi (VM) di dalam komputer fisik.</div>
+        <div class="virt-features">
+          <span class="virt-feat">Gratis & open-source</span>
+          <span class="virt-feat">Multi-OS</span>
+          <span class="virt-feat">Cocok pemula</span>
+          <span class="virt-feat">Aman untuk eksperimen</span>
+          <span class="virt-feat">Belajar jaringan</span>
+        </div>
+      </div>
+
+      <div class="virt-card vmware">
+        <div class="virt-logo">VMware</div>
+        <div class="virt-tag">ENTERPRISE · BROADCOM</div>
+        <div class="virt-desc">Platform virtualisasi enterprise menggunakan hypervisor untuk membagi sumber daya hardware menjadi beberapa VM.</div>
+        <div class="virt-features">
+          <span class="virt-feat">Performa stabil</span>
+          <span class="virt-feat">Fitur enterprise</span>
+          <span class="virt-feat">Skala besar</span>
+          <span class="virt-feat">Cloud computing</span>
+          <span class="virt-feat">Snapshot & Clone</span>
+        </div>
+      </div>
+
+      <div class="virt-card proxmox">
+        <div class="virt-logo">Proxmox</div>
+        <div class="virt-tag">BARE METAL · LINUX</div>
+        <div class="virt-desc">Platform virtualisasi berbasis Linux untuk mengelola VM dan container langsung di atas hardware (bare metal).</div>
+        <div class="virt-features">
+          <span class="virt-feat">Gratis & open-source</span>
+          <span class="virt-feat">Web panel</span>
+          <span class="virt-feat">VM + Container</span>
+          <span class="virt-feat">High Availability</span>
+          <span class="virt-feat">Private cloud</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PROFESI ══ -->
+  <section id="profesi">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2 class="section-title">Profesi &amp; Peluang Usaha IT</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="info-box"><span class="highlight">></span> 14 jenis profesi dan peluang usaha dalam bidang Teknologi Informasi yang relevan di era digital.</div>
+    <div class="profesi-table-wrap">
+      <table class="profesi-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Profesi</th>
+            <th>Deskripsi</th>
+            <th>Contoh Pekerjaan</th>
+            <th>Peluang Usaha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>Konten Creator</td>
+            <td>Membuat dan mengelola konten digital untuk media online</td>
+            <td>
+              <span class="profesi-badge">YouTuber</span>
+              <span class="profesi-badge">TikToker</span>
+              <span class="profesi-badge">Blogger</span>
+              <span class="profesi-badge">Streamer</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa konten</span>
+              <span class="usaha-badge">Monetisasi YT</span>
+              <span class="usaha-badge">Endorsement</span>
+            </td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Desain Grafis</td>
+            <td>Mendesain visual untuk kebutuhan promosi dan branding</td>
+            <td>
+              <span class="profesi-badge">Desainer Logo</span>
+              <span class="profesi-badge">Poster</span>
+              <span class="profesi-badge">Banner</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa desain logo</span>
+              <span class="usaha-badge">Branding UMKM</span>
+            </td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Desain UI/UX</td>
+            <td>Mendesain tampilan dan pengalaman pengguna aplikasi / website</td>
+            <td>
+              <span class="profesi-badge">UI Designer</span>
+              <span class="profesi-badge">UX Designer</span>
+              <span class="profesi-badge">Researcher</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa desain app</span>
+              <span class="usaha-badge">Jasa desain web</span>
+            </td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Pengembangan Software</td>
+            <td>Mengembangkan perangkat lunak sesuai kebutuhan</td>
+            <td>
+              <span class="profesi-badge">Software Engineer</span>
+              <span class="profesi-badge">Programmer</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Software custom</span>
+            </td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Pengembangan Web</td>
+            <td>Membuat dan mengelola website</td>
+            <td>
+              <span class="profesi-badge">Web Developer</span>
+              <span class="profesi-badge">Front-End</span>
+              <span class="profesi-badge">Back-End</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa website</span>
+              <span class="usaha-badge">Company profile</span>
+            </td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td>Dev Aplikasi Mobile</td>
+            <td>Membuat aplikasi berbasis Android/iOS</td>
+            <td>
+              <span class="profesi-badge">Mobile Dev</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa app mobile</span>
+            </td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td>Pengembangan Game</td>
+            <td>Membuat game digital untuk hiburan atau edukasi</td>
+            <td>
+              <span class="profesi-badge">Game Developer</span>
+              <span class="profesi-badge">Game Designer</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Penjualan game</span>
+            </td>
+          </tr>
+          <tr>
+            <td>08</td>
+            <td>Internet Marketer</td>
+            <td>Melakukan pemasaran produk melalui internet</td>
+            <td>
+              <span class="profesi-badge">Digital Marketer</span>
+              <span class="profesi-badge">Sosmed Specialist</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Iklan online</span>
+              <span class="usaha-badge">Manajemen sosmed</span>
+            </td>
+          </tr>
+          <tr>
+            <td>09</td>
+            <td>Analisis Basis Data</td>
+            <td>Mengelola dan menganalisis data untuk pengambilan keputusan</td>
+            <td>
+              <span class="profesi-badge">Data Analyst</span>
+              <span class="profesi-badge">Data Admin</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa analisis data</span>
+            </td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Konsultan SEO</td>
+            <td>Mengoptimalkan website agar mudah ditemukan di mesin pencarian</td>
+            <td>
+              <span class="profesi-badge">SEO Specialist</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa optimasi SEO</span>
+            </td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Konsultan TI</td>
+            <td>Memberi solusi dan saran terkait teknologi informasi</td>
+            <td>
+              <span class="profesi-badge">IT Consultant</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Jasa konsultan TI</span>
+            </td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Konsultan Keamanan</td>
+            <td>Menjaga dan meningkatkan keamanan jaringan</td>
+            <td>
+              <span class="profesi-badge">Network Security</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Audit jaringan</span>
+              <span class="usaha-badge">Keamanan jaringan</span>
+            </td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Pembisnis E-commerce</td>
+            <td>Menjalankan bisnis jual beli secara online</td>
+            <td>
+              <span class="profesi-badge">Online Shop Owner</span>
+              <span class="profesi-badge">Seller Marketplace</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Toko online</span>
+              <span class="usaha-badge">Dropshipping</span>
+            </td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>Proyek Startup</td>
+            <td>Mengembangkan usaha berbasis teknologi dan inovasi</td>
+            <td>
+              <span class="profesi-badge">Founder Startup</span>
+            </td>
+            <td>
+              <span class="usaha-badge">Perusahaan rintisan TI</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>MATERI TJKT · <span>RAFA SAMSA'IL HIDAYAT</span> · KELAS <span>10 TJKT</span></div>
+  <div style="margin-top:8px;opacity:0.4">// END OF FILE //</div>
+</footer>
+
+<script>
+  // Intersection Observer for section fade-in
+  const sections = document.querySelectorAll('section');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  sections.forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(24px)';
+    s.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    obs.observe(s);
+  });
+
+  // CMD card: typing effect on first hover
+  document.querySelectorAll('.cmd-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'all 0.3s ease';
+    });
+  });
+</script>
+</body>
+</html>
